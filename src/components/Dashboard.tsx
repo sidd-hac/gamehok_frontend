@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 interface Tournament {
     id: number;
@@ -81,8 +82,8 @@ export default function TournamentDashboard() {
                     <button
                         key={status}
                         className={`px-4 py-2 rounded-lg font-medium transition ${filter === status
-                                ? "bg-violet-600 text-white shadow-lg"
-                                : "bg-gray-800 text-gray-300 hover:bg-violet-700 hover:text-white"
+                            ? "bg-violet-600 text-white shadow-lg"
+                            : "bg-gray-800 text-gray-300 hover:bg-violet-700 hover:text-white"
                             }`}
                         onClick={() => setFilter(status)}
                     >
@@ -103,8 +104,8 @@ export default function TournamentDashboard() {
                             <h2 className="text-xl font-semibold text-white truncate">{t.title}</h2>
                             <p
                                 className={`mt-2 text-sm font-semibold py-1 px-2 inline-block rounded-lg ${t.status === "Upcoming"
-                                        ? "bg-blue-700 text-white"
-                                        : "bg-green-600 text-white"
+                                    ? "bg-blue-700 text-white"
+                                    : "bg-green-600 text-white"
                                     }`}
                             >
                                 {t.status}
@@ -117,6 +118,12 @@ export default function TournamentDashboard() {
                         <p className="text-gray-300">
                             <span className="font-semibold">💰 Prize:</span> ${t.prizePool}
                         </p>
+                        <Button
+                            className="mt-2"
+                            variant="secondary"
+                        >
+                            view details
+                        </Button>
 
                         <p className="text-gray-400 mt-3 text-sm">{t.description}</p>
                     </div>
