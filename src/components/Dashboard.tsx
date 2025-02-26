@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface Tournament {
     id: number;
@@ -97,7 +98,7 @@ export default function TournamentDashboard() {
                 {filteredTournaments.map((t) => (
                     <div
                         key={t.id}
-                        className="bg-gray-800 p-5 rounded-2xl shadow-lg border border-gray-800 hover:scale-[1.02] transition"
+                        className="bg-gray-800 p-5 rounded-2xl shadow-xl border border-gray-800 hover:scale-[1.02] transition "
                     >
                         <div className="flex justify-between items-center p-1" >
 
@@ -122,7 +123,9 @@ export default function TournamentDashboard() {
                             className="mt-2"
                             variant="secondary"
                         >
-                            View details
+                            <Link href={`/tournaments/${t.id}`}>
+                                View details
+                            </Link>
                         </Button>
 
                         <p className="text-gray-400 mt-3 text-sm">{t.description}</p>

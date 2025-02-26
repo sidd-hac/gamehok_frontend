@@ -1,3 +1,4 @@
+"use client"
 
 import TournamentDashboard from "@/components/Dashboard";
 import Navbar from "@/components/Navbar";
