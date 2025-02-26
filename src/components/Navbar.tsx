@@ -7,9 +7,14 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 
+interface GamesFilterProps {
+    searchQuery: string;
+    onSearchChange: (query: string) => void;
+}
 
 
-const Navbar = () => {
+
+const Navbar = ({searchQuery , onSearchChange} : GamesFilterProps) => {
 
         const [isOpen, setIsOpen] = useState(false);
       
@@ -36,6 +41,8 @@ const Navbar = () => {
                     <input
                         type="text"
                         placeholder="Search..."
+                        value={searchQuery}
+                        onChange={(e) => onSearchChange(e.target.value)}
                         className="  w-full sm:px-6 sm:py-2 px-3 py-1 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-300 max-sm:placeholder:text-xs sm:placeholder:text-sm max-w-96"
                     />
                   

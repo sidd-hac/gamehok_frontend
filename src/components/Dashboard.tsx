@@ -122,7 +122,7 @@ export default function TournamentDashboard() {
                             className="mt-2"
                             variant="secondary"
                         >
-                            view details
+                            View details
                         </Button>
 
                         <p className="text-gray-400 mt-3 text-sm">{t.description}</p>
