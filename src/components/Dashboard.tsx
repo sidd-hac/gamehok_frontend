@@ -89,8 +89,7 @@ export default function TournamentDashboard() {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                    },
-                    credentials: "include",
+                    }
                 })
                 const data = await tournaments.json();
                 setTournaments(data);
