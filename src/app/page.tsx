@@ -10,16 +10,17 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // useEffect(() => {
-  //   let result = [...products];
+  //   let result = games;
 
 
-  //   if (searchQuery) {
+  //   if (searchQuery && result) {
   //     result = result.filter(product =>
   //       product.title.toLowerCase().includes(searchQuery.toLowerCase())
   //     );
+  //     setFilteredGames(result);
   //   }
 
-  // }, [])
+  // }, [games, searchQuery])
 
 
   return (
@@ -28,7 +29,7 @@ export default function Home() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
-      <TournamentDashboard />
+      <TournamentDashboard/>
     </div>
   );
 }

@@ -5,17 +5,9 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
-interface Tournament {
-    id: number;
-    title: string;
-    gameName: string;
-    date: string;
-    prizePool: number;
-    status: string;
-    description: string;
-}
 
-interface Tournament{
+
+export interface Tournament{
     id: number;
     title: string;
     gameName: string;
@@ -26,6 +18,7 @@ interface Tournament{
 }
 
 // const tournamentsData: Tournament[] = [
+
 //     {
 //         id: 1,
 //         title: "Winter Clash 2025",
@@ -72,6 +65,7 @@ interface Tournament{
 //         description: "Solo tournament with cash rewards",
 //     },
 // ];
+
 
 export default function TournamentDashboard() {
 
