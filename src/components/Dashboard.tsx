@@ -85,7 +85,7 @@ export default function TournamentDashboard() {
 
                 setLoading(true);
 
-                const tournaments = await fetch(" http://localhost:8080/tournaments" , {
+                const tournaments = await fetch(" https://gamehok.netlify.app/tournaments" , {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

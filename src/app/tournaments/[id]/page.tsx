@@ -63,7 +63,7 @@ export default function TournamentDetailPage() {
 
             try {
 
-                const tournament = await fetch(`http://localhost:8080/tournaments/${id}`, {
+                const tournament = await fetch(`https://gamehok.netlify.app/tournaments/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
