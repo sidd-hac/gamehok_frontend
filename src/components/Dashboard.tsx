@@ -91,6 +91,7 @@ export default function TournamentDashboard() {
                         "Content-Type": "application/json",
                     },
                     credentials: "include",
+                    mode: "no-cors"
                 })
                 const data = await tournaments.json();
                 setTournaments(data);
