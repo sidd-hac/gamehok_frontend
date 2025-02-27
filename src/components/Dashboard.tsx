@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 interface Tournament {
     id: number;
@@ -14,61 +15,108 @@ interface Tournament {
     description: string;
 }
 
-const tournamentsData: Tournament[] = [
-    {
-        id: 1,
-        title: "Winter Clash 2025",
-        gameName: "Valorant",
-        date: "2025-03-10",
-        prizePool: 5000.0,
-        status: "Upcoming",
-        description: "5v5, Best of 3, Open to all",
-    },
-    {
-        id: 2,
-        title: "Apex Legends Showdown",
-        gameName: "Apex Legends",
-        date: "2025-02-20",
-        prizePool: 3000.0,
-        status: "Completed",
-        description: "Trios, $1000 per player",
-    },
-    {
-        id: 3,
-        title: "CS:GO Pro League",
-        gameName: "CS:GO",
-        date: "2025-04-01",
-        prizePool: 10000.0,
-        status: "Upcoming",
-        description: "5v5, Bracket Style",
-    },
-    {
-        id: 4,
-        title: "Dota 2 Championship",
-        gameName: "Dota 2",
-        date: "2025-05-15",
-        prizePool: 15000.0,
-        status: "Upcoming",
-        description: "Teams of 5, Double Elimination",
-    },
-    {
-        id: 5,
-        title: "Fortnite Battle Royale",
-        gameName: "Fortnite",
-        date: "2025-01-25",
-        prizePool: 7000.0,
-        status: "Completed",
-        description: "Solo tournament with cash rewards",
-    },
-];
+interface Tournament{
+    id: number;
+    title: string;
+    gameName: string;
+    date: string;
+    prizePool: number;
+    status: string;
+    description: string;
+}
+
+// const tournamentsData: Tournament[] = [
+//     {
+//         id: 1,
+//         title: "Winter Clash 2025",
+//         gameName: "Valorant",
+//         date: "2025-03-10",
+//         prizePool: 5000.0,
+//         status: "Upcoming",
+//         description: "5v5, Best of 3, Open to all",
+//     },
+//     {
+//         id: 2,
+//         title: "Apex Legends Showdown",
+//         gameName: "Apex Legends",
+//         date: "2025-02-20",
+//         prizePool: 3000.0,
+//         status: "Completed",
+//         description: "Trios, $1000 per player",
+//     },
+//     {
+//         id: 3,
+//         title: "CS:GO Pro League",
+//         gameName: "CS:GO",
+//         date: "2025-04-01",
+//         prizePool: 10000.0,
+//         status: "Upcoming",
+//         description: "5v5, Bracket Style",
+//     },
+//     {
+//         id: 4,
+//         title: "Dota 2 Championship",
+//         gameName: "Dota 2",
+//         date: "2025-05-15",
+//         prizePool: 15000.0,
+//         status: "Upcoming",
+//         description: "Teams of 5, Double Elimination",
+//     },
+//     {
+//         id: 5,
+//         title: "Fortnite Battle Royale",
+//         gameName: "Fortnite",
+//         date: "2025-01-25",
+//         prizePool: 7000.0,
+//         status: "Completed",
+//         description: "Solo tournament with cash rewards",
+//     },
+// ];
 
 export default function TournamentDashboard() {
+
+
+    const [tournaments , setTournaments] = useState<Tournament[]>([]);
+    const [loading, setLoading] = useState(true);
+
     const [filter, setFilter] = useState("All");
+
+    useEffect(()=>{
+
+      
+
+        const getTournaments = async() => {
+
+            try {
+
+                setLoading(true);
+
+                const tournaments = await fetch(" http://localhost:8080/tournaments" , {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                const data = await tournaments.json();
+                setTournaments(data);
+                
+            } catch (error) {
+                console.error("Error fetching tournaments:", error);
+                
+            }finally{
+                setLoading(false);
+            }
+
+           
+        }
+
+        getTournaments();
+    }, [])
 
     const filteredTournaments =
         filter === "All"
-            ? tournamentsData
-            : tournamentsData.filter((t) => t.status === filter);
+            ? tournaments
+            : tournaments.filter((t) => t.status === filter);
 
     return (
         <div className="p-6 max-w-7xl mx-auto">
@@ -94,7 +142,14 @@ export default function TournamentDashboard() {
             </div>
 
             {/* Tournament Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {loading ? (
+                <div className="flex justify-center items-center ">
+                    <span>
+                        <Loader2 className="w-10 h-10 animate-spin"/>
+                    </span>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredTournaments.map((t) => (
                     <div
                         key={t.id}
@@ -132,6 +187,8 @@ export default function TournamentDashboard() {
                     </div>
                 ))}
             </div>
+            )}
+            
         </div>
     );
 }
