@@ -68,6 +68,7 @@ export default function TournamentDetailPage() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    credentials: "include",
 
                 })
                 const data = await tournament.json();
